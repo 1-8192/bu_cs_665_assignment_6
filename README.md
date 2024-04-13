@@ -28,9 +28,9 @@ centralize the creation logic in one place. This makes the code cleaner and easi
 is a creational design pattern that provides an interface for creating objects, but allows subclasses to alter the type of 
 objects that will be created.
 
-![Original Code](/image/condiment_mess.png)
+![Original Code](/images/condiment_mess.png)
 
-![New code calling factory](/image/condiment_factory.png)
+![New code calling factory](/images/condiment_factory.png)
 
 The implementation involves creating a CondimentFactory class with a createCondiment method that extends a 
 CondimentFactoryInterface. The factory method takes a string as input and returns a Condiment object based on the input 
