@@ -2,23 +2,16 @@
 | CS-665       | Software Design & Patterns |
 |--------------|----------------------------|
 | Name         | ALESSANDRO ALLEGRANZI      |
-| Date         | 02/08/2024                 |
+| Date         | 04/18/2024                 |
 | Course       | CS 665 Spring              |
-| Assignment # | 1                          |
+| Assignment # | 6                          |
 
 # Assignment Overview
 
-The objective of this assignment is to create an application that represents a beverage vending machine that reliably serves high-quality hot beverages.
-The machine serves Americano, Espresso, and Latte Macchiato coffees as well as Black Tea, Yellow tea, and Green Tea teas.
-Customers also have the option of adding 0-3 portions of milk and sugar to their drink (max 6 total condiments). The Beverage vending machine also displays the total cost of the beverage selected by the user.
-
-The assignment specified that user interaction was optional, but I built out very simple terminal interactions in order to directly test the application (in addition to unit tests).
-A user can interact with the machine via simple CLI inputs. Please see the screenshot below:
-
-![Example interaction](./images/screenshot.png)
+The objective of this assignment is to refactor an older project using the strategies learned in class.
 
 # GitHub Repository Link:
-https://github.com/1-8192/bu_cs_665_assignment_1_allegranzi
+https://github.com/1-8192/bu_cs_665_assignment_6_allegranzi
 
 # Implementation Description 
 
