@@ -8,7 +8,11 @@
 
 # Assignment Overview
 
-The objective of this assignment is to refactor an older project using the strategies learned in class.
+The objective of this assignment is to refactor an older project using the strategies learned in class. I chose the initial
+assignment to refactor, as it featured less design patterns than successive assignments. I originally went a little above and
+beyond by implementing a strategy design pattern, which in retrospect was premature, since I played myself out of a great 
+refactoring opportunity for this assignment. I was still able to find 3 significant refactors to the older code, which improve
+the original project's design and maintainability.
 
 # GitHub Repository Link:
 https://github.com/1-8192/bu_cs_665_assignment_6_allegranzi
@@ -20,7 +24,7 @@ https://github.com/1-8192/bu_cs_665_assignment_6_allegranzi
 ### Refactoring 1: Adding Factory Method Pattern to Condiment class
 
 The main justification for this refactoring is to eliminate code duplication and improve maintainability. 
-In the original addCondiments method, there is duplicated code for adding milk and sugar insise a manual conditional check
+In the original addCondiments method, there is duplicated code for adding milk and sugar inside a manual conditional check
 against a string value for condiment type. This duplication can make the code harder to maintain, prone to errors, 
 and more difficult to extend. To add a new condiment, the developer would need to find the method in the BeverageMachine class
 and manually update new options. By using a factory to create the condiments, we can eliminate the duplication and 
@@ -28,7 +32,11 @@ centralize the creation logic in one place. This makes the code cleaner and easi
 is a creational design pattern that provides an interface for creating objects, but allows subclasses to alter the type of 
 objects that will be created.
 
+Original Code inside BeverageVendorMachine class:
+
 ![Original Code](/images/condiment_mess.png)
+
+New code calling Factory:
 
 ![New code calling factory](/images/condiment_factory.png)
 
