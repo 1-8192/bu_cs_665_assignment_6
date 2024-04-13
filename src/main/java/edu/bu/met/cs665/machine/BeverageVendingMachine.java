@@ -9,13 +9,7 @@
 package edu.bu.met.cs665.machine;
 
 import edu.bu.met.cs665.FullyAutomatedBeverageMachineConstants;
-import edu.bu.met.cs665.beverage.Americano;
-import edu.bu.met.cs665.beverage.Beverage;
-import edu.bu.met.cs665.beverage.BlackTea;
-import edu.bu.met.cs665.beverage.Espresso;
-import edu.bu.met.cs665.beverage.GreenTea;
-import edu.bu.met.cs665.beverage.LatteMacchiato;
-import edu.bu.met.cs665.beverage.YellowTea;
+import edu.bu.met.cs665.beverage.*;
 import edu.bu.met.cs665.condiments.*;
 
 import java.util.ArrayList;
@@ -41,57 +35,24 @@ public class BeverageVendingMachine implements VendingMachine {
   protected Scanner inputScanner = new Scanner(System.in);
 
   /**
-   * Takes an order from a customer for a beverage.
+   * NEW FOR ASSIGNMENT 6. Changed to use a factory method. Takes an order
+   * from a customer for a beverage.
    */
   public void registerOrder() {
     String order = "";
-
+    boolean success = true;
+    BeverageFactory beverageFactory = new BeverageFactory();
     do {
-      System.out.println(FullyAutomatedBeverageMachineConstants.COFFEE_OR_TEA);
+      System.out.println(FullyAutomatedBeverageMachineConstants.OPTIONS);
       order = inputScanner.nextLine();
-    } while (!order.equalsIgnoreCase("Coffee") && !order.equalsIgnoreCase("Tea"));
-
-    // Setting up switch statements based on user input to set the right kind of
-    // beverage as the beverage variable.
-    if (order.equalsIgnoreCase("tea")) {
-      System.out.println(FullyAutomatedBeverageMachineConstants.TEA_OPTIONS);
-      String teaChoice = inputScanner.nextLine();
-
-      switch (teaChoice.toLowerCase()) {
-        case "black tea":
-          selectedBeverage = new BlackTea();
-          break;
-        case "green tea":
-          selectedBeverage = new GreenTea();
-          break;
-        case "yellow tea":
-          selectedBeverage = new YellowTea();
-          break;
-        default:
-          System.out.println(FullyAutomatedBeverageMachineConstants.TEA_ERROR);
-          selectedBeverage = new BlackTea();
-          break;
+      try {
+        // For assignment 6  have replaced a long switch statement with a factory method.
+        selectedBeverage = beverageFactory.createBeverage(order.toLowerCase());
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        success = false;
       }
-    } else if (order.equalsIgnoreCase("coffee")) {
-      System.out.println(FullyAutomatedBeverageMachineConstants.COFFEE_OPTIONS);
-      String coffeeChoice = inputScanner.nextLine();
-
-      switch (coffeeChoice.toLowerCase()) {
-        case "americano":
-          selectedBeverage = new Americano();
-          break;
-        case "espresso":
-          selectedBeverage = new Espresso();
-          break;
-        case "latte macchiato":
-          selectedBeverage = new LatteMacchiato();
-          break;
-        default:
-          System.out.println(FullyAutomatedBeverageMachineConstants.COFFEE_ERROR);
-          selectedBeverage = new Espresso();
-          break;
-      }
-    }
+    } while (!success);
 
     System.out.println("Thank you. You have selected " + selectedBeverage.toString());
   }
@@ -153,7 +114,8 @@ public class BeverageVendingMachine implements VendingMachine {
   }
 
   /**
-   * Adds condiments to the list of condiments. 6 max condiments, 3 max each of milk and sugar.
+   * Altered for Assignmnet 6. Adds condiments to the list of condiments.
+   * 6 max condiments, 3 max each of milk and sugar.
    */
   public void addCondiments(String type, int amount) {
     // Checking if we already have the max 6 condiments allowed.

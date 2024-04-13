@@ -24,7 +24,9 @@ In the original addCondiments method, there is duplicated code for adding milk a
 against a string value for condiment type. This duplication can make the code harder to maintain, prone to errors, 
 and more difficult to extend. To add a new condiment, the developer would need to find the method in the BeverageMachine class
 and manually update new options. By using a factory to create the condiments, we can eliminate the duplication and 
-centralize the creation logic in one place. This makes the code cleaner and easier to maintain. 
+centralize the creation logic in one place. This makes the code cleaner and easier to maintain. The Factory Method pattern 
+is a creational design pattern that provides an interface for creating objects, but allows subclasses to alter the type of 
+objects that will be created.
 
 ![Original Code](/image/condiment_mess.png)
 
@@ -32,12 +34,92 @@ centralize the creation logic in one place. This makes the code cleaner and easi
 
 The implementation involves creating a CondimentFactory class with a createCondiment method that extends a 
 CondimentFactoryInterface. The factory method takes a string as input and returns a Condiment object based on the input 
-string. The addCondiments method in the BeverageVendingMachine class is then modified to use the CondimentFactory. 
-This approach adheres to the Factory Method design pattern, which provides a way to delegate the instantiation logic 
-to child classes. Unit tests for the factory class were also created. Please see the new UML for assignment 6 for details 
-on class relationships.
+string. The addCondiments method in the BeverageVendingMachine class is then modified to use the CondimentFactory. The 
+factory method also throws an IllegalArgumentException if the input string does not match any known condiment types, as a defensive
+measure against erroneous user input. This approach adheres to the Factory Method design pattern, which provides a way 
+to delegate the instantiation logic to child classes. Unit tests for the factory class were also created. 
+Please see the new UML for assignment 6 for details on class relationships.
 
-### Refactoring 2: TBD
+### Refactoring 2: Adding Factory Method Pattern to Beverage Class
+
+Similar to refactoring 1, Beverage creation is another great case for using the Factory Method pattern. It encapsulates 
+the logic for creating Beverage objects in one place, making the code easier to maintain and extend. 
+If a new type of Beverage needs to be added in the future, only modifying the BeverageFactory class is necessary, 
+rather than searching through the entire codebase for places where Beverage objects are created. Additionally, the original
+code for beverage creation was a repetitive, long switch statement that required various user prompts located in the
+BeverageVendingMachine class.
+
+Original Code:
+
+```
+// Setting up switch statements based on user input to set the right kind of
+    // beverage as the beverage variable.
+    if (order.equalsIgnoreCase("tea")) {
+      System.out.println(FullyAutomatedBeverageMachineConstants.TEA_OPTIONS);
+      String teaChoice = inputScanner.nextLine();
+
+      switch (teaChoice.toLowerCase()) {
+        case "black tea":
+          selectedBeverage = new BlackTea();
+          break;
+        case "green tea":
+          selectedBeverage = new GreenTea();
+          break;
+        case "yellow tea":
+          selectedBeverage = new YellowTea();
+          break;
+        default:
+          System.out.println(FullyAutomatedBeverageMachineConstants.TEA_ERROR);
+          selectedBeverage = new BlackTea();
+          break;
+      }
+    } else if (order.equalsIgnoreCase("coffee")) {
+      System.out.println(FullyAutomatedBeverageMachineConstants.COFFEE_OPTIONS);
+      String coffeeChoice = inputScanner.nextLine();
+
+      switch (coffeeChoice.toLowerCase()) {
+        case "americano":
+          selectedBeverage = new Americano();
+          break;
+        case "espresso":
+          selectedBeverage = new Espresso();
+          break;
+        case "latte macchiato":
+          selectedBeverage = new LatteMacchiato();
+          break;
+        default:
+          System.out.println(FullyAutomatedBeverageMachineConstants.COFFEE_ERROR);
+          selectedBeverage = new Espresso();
+          break;
+      }
+    }
+```
+
+The implementation of the Factory Method pattern in the BeverageFactory class involves a createBeverage method 
+(implemented from the interface class) that takes a string as input and returns a Beverage object. The string input 
+determines the type of Beverage object that is created. This is done using a switch statement that checks the input 
+string and returns a new instance of the appropriate Beverage subclass. If the input string does not match any of the 
+known beverage types, an IllegalArgumentException is thrown. This approach ensures that Beverage objects are always 
+created in a valid state, and provides a clear and consistent way to create new Beverage objects throughout the application.
+
+New code using factory:
+
+```
+do {
+      System.out.println(FullyAutomatedBeverageMachineConstants.OPTIONS);
+      order = inputScanner.nextLine();
+      try {
+        selectedBeverage = beverageFactory.createBeverage(order.toLowerCase());
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        success = false;
+      }
+    } while (!success);
+```
+
+The above new code is much less verbose and is much clearer in intention. The switch statement still exists in the Factory class,
+but it is centralized and abstracted away from the vending machine class. I have also added additional unit tests to cover the
+new factory class, and updated the new UML diagram to reflect the new factory classes. 
 
 ### Refactoring 3: TBD
 

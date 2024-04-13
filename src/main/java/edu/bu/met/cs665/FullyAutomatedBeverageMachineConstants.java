@@ -37,29 +37,8 @@ public class FullyAutomatedBeverageMachineConstants {
   /**
    * cofffee or tea selection.
    */
-  public static final String COFFEE_OR_TEA = "Would you like coffee or tea?";
-
-  /**
-   * Tea options.
-   */
-  public static final String TEA_OPTIONS = "Would you like Black Tea, Green Tea, or Yellow Tea?";
-
-  /**
-   * Coffee options.
-   */
-  public static final String COFFEE_OPTIONS = "Would you like an Americano, Espresso, "
-        + "or Latte Macchiato?";
-
-  /**
-   * Tea error message.
-   */
-  public static final String TEA_ERROR = "That is not a type of tea. We will make you a black tea.";
-
-  /**
-   * Coffee error message.
-   */
-  public static final String COFFEE_ERROR = "That is not a type of coffee. "
-        + "We will make you an espresso.";
+  public static final String OPTIONS = "Would you like Black Tea, Green Tea, Yellow Tea, "
+        + "or an Americano, Espresso, or Latte Macchiato?";
 
   /**
    * Calculation error message.
