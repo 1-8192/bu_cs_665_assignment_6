@@ -16,9 +16,8 @@ import edu.bu.met.cs665.beverage.Espresso;
 import edu.bu.met.cs665.beverage.GreenTea;
 import edu.bu.met.cs665.beverage.LatteMacchiato;
 import edu.bu.met.cs665.beverage.YellowTea;
-import edu.bu.met.cs665.condiments.Condiment;
-import edu.bu.met.cs665.condiments.Milk;
-import edu.bu.met.cs665.condiments.Sugar;
+import edu.bu.met.cs665.condiments.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -163,13 +162,14 @@ public class BeverageVendingMachine implements VendingMachine {
     }
 
     int limit = Math.min(amount, 3);
-    if (type.equalsIgnoreCase("milk")) {
-      for (int i = 0; i < limit; i++) {
-        condiments.add(new Milk());
-      }
-    } else if (type.equalsIgnoreCase("sugar")) {
-      for (int i = 0; i < limit; i++) {
-        condiments.add(new Sugar());
+    CondimentFactoryInterface condimentFactory = new CondimentFactory();
+    // New code for Assignment 6. Using the CondimentFactory to create condiments rather
+    // than using conditional logic.
+    for (int i =0; i < limit; i++) {
+      try {
+        condiments.add(condimentFactory.createCondiment(type));
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
       }
     }
   }
