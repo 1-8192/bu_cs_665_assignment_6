@@ -19,16 +19,23 @@ https://github.com/1-8192/bu_cs_665_assignment_6_allegranzi
 
 ### Refactoring 1: Adding Factory Method Pattern to Condiment class
 
-The justification for this refactoring is to eliminate code duplication and improve maintainability. 
-In the original addCondiments method, there is duplicated code for adding milk and sugar. This duplication can make the 
-code harder to maintain and more prone to errors. By using a factory to create the condiments, we can eliminate this 
-duplication and centralize the creation logic in one place. This makes the code cleaner and easier to maintain.  
+The main justification for this refactoring is to eliminate code duplication and improve maintainability. 
+In the original addCondiments method, there is duplicated code for adding milk and sugar insise a manual conditional check
+against a string value for condiment type. This duplication can make the code harder to maintain, prone to errors, 
+and more difficult to extend. To add a new condiment, the developer would need to find the method in the BeverageMachine class
+and manually update new options. By using a factory to create the condiments, we can eliminate the duplication and 
+centralize the creation logic in one place. This makes the code cleaner and easier to maintain. 
 
-The implementation involves creating a CondimentFactory class with a createCondiment method. 
-This method takes a string as input and returns a Condiment object based on the input string. 
-The addCondiments method in the BeverageVendingMachine class is then modified to use the CondimentFactory. 
+![Original Code](/image/condiment_mess.png)
+
+![New code calling factory](/image/condiment_factory.png)
+
+The implementation involves creating a CondimentFactory class with a createCondiment method that extends a 
+CondimentFactoryInterface. The factory method takes a string as input and returns a Condiment object based on the input 
+string. The addCondiments method in the BeverageVendingMachine class is then modified to use the CondimentFactory. 
 This approach adheres to the Factory Method design pattern, which provides a way to delegate the instantiation logic 
-to child classes.
+to child classes. Unit tests for the factory class were also created. Please see the new UML for assignment 6 for details 
+on class relationships.
 
 ### Refactoring 2: TBD
 
