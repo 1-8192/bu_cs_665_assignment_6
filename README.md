@@ -229,8 +229,9 @@ I extended in 2 classes, to represent steeping tea and pulling coffee. This way 
 
 ## Diagrams
 
-The UML diagram for the application was created on draw.io. A PDF copy of the original diagram is available ![here](./diagrams/cs_665_assignment_1.drawio.pdf).
-The updated UML diagram post-refactoring for Assignment 6 is available ![here](./diagrams/cs_665_assignment_6.drawio.pdf).
+The UML diagram for the application was created on draw.io. A PDF copy of the original diagram is available ![here](./diagrams/cs_665_assignment_1.drawio.pdf)
+
+The updated UML diagram post-refactoring for Assignment 6 is available ![here](./diagrams/cs_665_assignment_6.drawio.pdf)
 
 # Maven Commands
 
