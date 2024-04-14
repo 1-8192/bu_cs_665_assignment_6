@@ -1,18 +1,23 @@
 
-| CS-665       | Software Design & Patterns |
-|--------------|----------------------------|
-| Name         | ALESSANDRO ALLEGRANZI      |
-| Date         | 04/18/2024                 |
-| Course       | CS 665 Spring              |
-| Assignment # | 6                          |
+| CS-665        | Software Design & Patterns |
+|---------------|----------------------------|
+| Name          | ALESSANDRO ALLEGRANZI      |
+| Date          | 04/18/2024                 |
+| Course        | CS 665 Spring              |
+| Assignment #  | 6                          |
 
 # Assignment Overview
 
 The objective of this assignment is to refactor an older project using the strategies learned in class. I chose the initial
-assignment to refactor, as it featured less design patterns than successive assignments. I originally went a little above and
-beyond by implementing a strategy design pattern, which in retrospect was premature, since I played myself out of a great 
-refactoring opportunity for this assignment. I was still able to find 3 significant refactors to the older code, which improve
-the original project's design and maintainability.
+assignment 1 (Beverage Vending Machine) to refactor, as it featured less design patterns than successive assignments.
+I originally went a little above and beyond by implementing a strategy design pattern, which in retrospect was premature, 
+since I played myself out of a great refactoring opportunity for this assignment. I was still able to find 3 significant refactors 
+to the older code, which improve the original project's design and maintainability.
+
+I refactored the original code by implementing the Factory method pattern in two situations, for Condiments and Beverages. I also 
+cleaned up the Main class and moved the prompt and machine logic into the BeverageMachine class, which I believe is better design.
+The application still runs the same way as it previously did, with one exception being a simplified order "menu" presented to the user. In line
+with refactoring practices I did not introduce new features or change original functionality. Please see more below.
 
 # GitHub Repository Link:
 https://github.com/1-8192/bu_cs_665_assignment_6_allegranzi
@@ -129,9 +134,44 @@ The above new code is much less verbose and is much clearer in intention. The sw
 but it is centralized and abstracted away from the vending machine class. I have also added additional unit tests to cover the
 new factory class, and updated the new UML diagram to reflect the new factory classes. 
 
-### Refactoring 3: TBD
+### Refactoring 3: Simplifying Main Class and Moving Logic to BeverageVendingMachine
 
-## Original Assignment 1 description for context:
+The justification for moving code out of the Main class and into a new runMachine() method in the BeverageVendingMachine class is primarily to adhere to the principle of separation of concerns. This principle states that each part of a program should handle a specific task and be independent from the rest of the system. The Main class should ideally be kept as clean as possible, serving as an entry point to the application and delegating the actual work to other classes. By moving the logic to the BeverageVendingMachine class, you are encapsulating the behavior related to the vending machine within the class that represents it, making the code more modular, easier to read, and maintain.
+New Main Class:
+
+``` 
+public static void main(String[] args) {
+    // Instantiating the beverage machine.
+    VendingMachine bevMachine = new BeverageVendingMachine();
+    // Running the machine.
+    bevMachine.runMachine();
+  }
+}
+```
+
+Method in BeverageVendingMachine:
+```
+public void runMachine() {
+    // Guiding user through CLI inputs to place an order.
+    System.out.println(FullyAutomatedBeverageMachineConstants.WELCOME_MESSAGE);
+    registerOrder();
+    System.out.println(FullyAutomatedBeverageMachineConstants.ORDER_TAKEN);
+
+    // Preparing order with condiments.
+    prepareOrder();
+
+    // Calculating order total and completing interaction.
+    double total = calculateOrderTotal();
+    if (total != 0.00) {
+      System.out.println(FullyAutomatedBeverageMachineConstants.TOTAL_MESSAGE + total);
+    }
+    System.out.println(FullyAutomatedBeverageMachineConstants.BYE_MESSAGE);
+  }
+```
+
+The implementation of this refactoring involved creating a new runMachine() method in the BeverageVendingMachine class. This method now contains the logic that was previously in the Main class. It guides the user through the command-line inputs to place an order, prepares the order with condiments, calculates the order total, and completes the interaction. The Main class now simply instantiates the BeverageVendingMachine and calls the runMachine() method. This makes the Main class much simpler and more readable, and it's immediately clear what its purpose is. The logic related to the operation of the vending machine is now appropriately located within the BeverageVendingMachine class.
+
+## Original Assignment 1 description (for context):
 
 - Explain the level of flexibility in your implementation, including how new object types can
 be easily added or removed in the future.

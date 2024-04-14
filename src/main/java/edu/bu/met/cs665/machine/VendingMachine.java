@@ -28,4 +28,9 @@ public interface VendingMachine {
    * Prepares the order for the client.
    */
   void prepareOrder();
+
+  /**
+   * Runs the machine and processes user input to create an order.
+   */
+  void runMachine();
 }

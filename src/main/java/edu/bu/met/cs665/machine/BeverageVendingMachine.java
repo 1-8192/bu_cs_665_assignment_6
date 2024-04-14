@@ -35,6 +35,27 @@ public class BeverageVendingMachine implements VendingMachine {
   protected Scanner inputScanner = new Scanner(System.in);
 
   /**
+   * NEW FOR ASSIGNMENT 6. Moved this code into the class and out of Main.java.
+   * Runs the machine.
+   */
+  public void runMachine() {
+    // Guiding user through CLI inputs to place an order.
+    System.out.println(FullyAutomatedBeverageMachineConstants.WELCOME_MESSAGE);
+    registerOrder();
+    System.out.println(FullyAutomatedBeverageMachineConstants.ORDER_TAKEN);
+
+    // Preparing order with condiments.
+    prepareOrder();
+
+    // Calculating order total and completing interaction.
+    double total = calculateOrderTotal();
+    if (total != 0.00) {
+      System.out.println(FullyAutomatedBeverageMachineConstants.TOTAL_MESSAGE + total);
+    }
+    System.out.println(FullyAutomatedBeverageMachineConstants.BYE_MESSAGE);
+  }
+
+  /**
    * NEW FOR ASSIGNMENT 6. Changed to use a factory method. Takes an order
    * from a customer for a beverage.
    */
@@ -106,7 +127,7 @@ public class BeverageVendingMachine implements VendingMachine {
     try {
       // Using a stream here as it's less verbose than a loop.
       return Double.sum(selectedBeverage.getPrice(), condiments.stream()
-                  .mapToDouble(Condiment::getPrice).sum());
+            .mapToDouble(Condiment::getPrice).sum());
     } catch (Exception e) {
       System.out.println(FullyAutomatedBeverageMachineConstants.CALCULATION_ERROR);
       return 0.00;
@@ -127,7 +148,7 @@ public class BeverageVendingMachine implements VendingMachine {
     CondimentFactoryInterface condimentFactory = new CondimentFactory();
     // New code for Assignment 6. Using the CondimentFactory to create condiments rather
     // than using conditional logic.
-    for (int i =0; i < limit; i++) {
+    for (int i = 0; i < limit; i++) {
       try {
         condiments.add(condimentFactory.createCondiment(type));
       } catch (IllegalArgumentException e) {
