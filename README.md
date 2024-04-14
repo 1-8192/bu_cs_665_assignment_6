@@ -26,6 +26,8 @@ https://github.com/1-8192/bu_cs_665_assignment_6_allegranzi
 
 ## Assignment 6 Refactoring Changes
 
+The updated UML diagram post-refactoring for Assignment 6 is available ![here](./diagrams/cs_665_assignment_6.drawio.pdf).
+
 ### Refactoring 1: Adding Factory Method Pattern to Condiment class
 
 The main justification for this refactoring is to eliminate code duplication and improve maintainability. 
@@ -134,9 +136,14 @@ The above new code is much less verbose and is much clearer in intention. The sw
 but it is centralized and abstracted away from the vending machine class. I have also added additional unit tests to cover the
 new factory class, and updated the new UML diagram to reflect the new factory classes. 
 
-### Refactoring 3: Simplifying Main Class and Moving Logic to BeverageVendingMachine
+### Refactoring 3: Simplifying Main Class and Moving Logic into a new BeverageVendingMachine method.
 
-The justification for moving code out of the Main class and into a new runMachine() method in the BeverageVendingMachine class is primarily to adhere to the principle of separation of concerns. This principle states that each part of a program should handle a specific task and be independent from the rest of the system. The Main class should ideally be kept as clean as possible, serving as an entry point to the application and delegating the actual work to other classes. By moving the logic to the BeverageVendingMachine class, you are encapsulating the behavior related to the vending machine within the class that represents it, making the code more modular, easier to read, and maintain.
+The logic flow in the Main.java class processing an order for a customer was moved to the BeverageVendingMachine class to adhere 
+to the principle of separation of concerns. This principle states that each part of a program should handle a specific task and be 
+independent of the rest of the system. The Main class should ideally be kept as clean as possible, serving as an entry point to the application 
+and delegating the actual work to other classes. By moving the logic to the BeverageVendingMachine class, vending machine behavior is encapsulated 
+within the class that represents it, making the code more modular, easier to read, and maintain.
+
 New Main Class:
 
 ``` 
@@ -169,7 +176,12 @@ public void runMachine() {
   }
 ```
 
-The implementation of this refactoring involved creating a new runMachine() method in the BeverageVendingMachine class. This method now contains the logic that was previously in the Main class. It guides the user through the command-line inputs to place an order, prepares the order with condiments, calculates the order total, and completes the interaction. The Main class now simply instantiates the BeverageVendingMachine and calls the runMachine() method. This makes the Main class much simpler and more readable, and it's immediately clear what its purpose is. The logic related to the operation of the vending machine is now appropriately located within the BeverageVendingMachine class.
+The implementation involved creating a new runMachine() method in the BeverageVendingMachine class and the interface it implements. 
+This method now contains the logic that was previously in the Main class. It guides the user through the command-line inputs to place an order, 
+prepares the order with condiments, calculates the order total, and completes the interaction. The Main class now simply instantiates the BeverageVendingMachine 
+and calls the runMachine() method. This makes the Main class much simpler and more readable, and it's immediately clear what its purpose is. The logic related to 
+the operation of the vending machine is now appropriately located within the BeverageVendingMachine class. The original interface methods were kept in place and
+public to facilitate unit testing. The UML diagram was updated to include the new method in the interface and concrete BeverageVendingMachine class.
 
 ## Original Assignment 1 description (for context):
 
@@ -218,7 +230,7 @@ I extended in 2 classes, to represent steeping tea and pulling coffee. This way 
 ## Diagrams
 
 The UML diagram for the application was created on draw.io. A PDF copy of the original diagram is available ![here](./diagrams/cs_665_assignment_1.drawio.pdf).
-The updated UML diagram post-refactoring is available ![here](./diagrams/cs_665_assignment_6.drawio.pdf).
+The updated UML diagram post-refactoring for Assignment 6 is available ![here](./diagrams/cs_665_assignment_6.drawio.pdf).
 
 # Maven Commands
 
