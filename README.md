@@ -17,7 +17,12 @@ to the older code, which improve the original project's design and maintainabili
 I refactored the original code by implementing the Factory method pattern in two situations, for Condiments and Beverages. I also 
 cleaned up the Main class and moved the prompt and machine logic into the BeverageMachine class, which I believe is better design.
 The application still runs the same way as it previously did, with one exception being a simplified order "menu" presented to the user. In line
-with refactoring practices I did not introduce new features or change original functionality. Please see more below.
+with refactoring practices I did not introduce new features or change original functionality. 
+
+Screenshot of application:
+![screenshot of application](./images/screenshot.png)
+
+Please see more below on the refactoring.
 
 # GitHub Repository Link:
 https://github.com/1-8192/bu_cs_665_assignment_6_allegranzi
